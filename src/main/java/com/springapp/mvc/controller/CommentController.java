@@ -18,7 +18,7 @@ import java.util.List;
 public class CommentController {
 
     private CommentRepository commentRepository;
-    //   public static int p;
+    public static int numberBook=2;
 
     @Autowired
     public CommentController(CommentRepository commentRepository) {
@@ -26,17 +26,33 @@ public class CommentController {
         this.commentRepository = commentRepository;
     }
 
-    @RequestMapping(value = "viewComments", method = RequestMethod.GET)
-    public String getComments(Model model) {
+    @RequestMapping(value = "viewComments/{id}", method = RequestMethod.GET)
+    public String getComments(Model model, @PathVariable Integer id) {
         List<Comment> comments = this.commentRepository.listAll();
-
+        numberBook=id;
+        for (int i = 0; i < comments.size(); i++) {
+            if (comments.get(i).getiDBook() != id) {
+                comments.remove(i);
+            }
+        }
         model.addAttribute("comments", comments);
 
         return "viewComments";
     }
+    @RequestMapping(value = "postAddComment", method = RequestMethod.GET)
+    public String getPostAddComments(Model model) {
+        List<Comment> comments = this.commentRepository.listAll();
+        for (int i = 0; i < comments.size(); i++) {
+            if (comments.get(i).getiDBook() != numberBook) {
+                comments.remove(i);
+            }
+        }
+        model.addAttribute("comments", comments);
+
+        return "postAddComment";
+    }
 
     @RequestMapping(value = "addComment", method = RequestMethod.GET)
-
     public String addComment(Model model) {
         model.addAttribute("comment", new Comment());
 
@@ -45,16 +61,17 @@ public class CommentController {
 
     @RequestMapping(value = "addComment", method = RequestMethod.POST)
 
-     public String addComment(@ModelAttribute("comment") Comment comment) {
-      this.commentRepository.addComment(comment);
-       return "redirect:/viewComments";
-     }
+    public String addComment(@ModelAttribute("comment") Comment comment) {
+        comment.setiDBook(numberBook);
+        this.commentRepository.addComment(comment);
+        return "redirect:/postAddComment";
+    }
 
-     @RequestMapping(value = "deleteComment/{id}", method = RequestMethod.GET)
-     public String deleteComment(@PathVariable Integer id) {
-     this.commentRepository.removeComment(id);
+    @RequestMapping(value = "deleteComment/{id}", method = RequestMethod.GET)
+    public String deleteComment(@PathVariable Integer id) {
+        this.commentRepository.removeComment(id);
 
-      return "redirect:/viewComments";
+        return "redirect:/postAddComment";
     }
 
 

@@ -1,10 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
+
     <title>Library</title>
+    <meta charset=utf-8">
 </head>
 <body>
+
 <div>
     <h1>Library</h1>
     <c:if test="${!empty books}">
@@ -38,7 +42,7 @@
                     <td>
                     <td><a href="/correctBook/${book.iD}/${book.name}/${book.author}/${book.year}/${book.genre}/${book.about}/${book.count}/${book.rating}">Correct</a>
                     <td>
-                    <td><a href="viewComments">View comments</a>
+                    <td><a href="/viewComments/${book.iD}">View comments</a>
                     </td>
                 </tr>
 

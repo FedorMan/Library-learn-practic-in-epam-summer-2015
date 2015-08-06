@@ -19,7 +19,7 @@ import java.util.List;
 public class BookController {
 
     private BookRepository bookRepository;
-    public static int p;
+    public static int numberBook;
 
     @Autowired
     public BookController(BookRepository bookRepository) {
@@ -30,6 +30,8 @@ public class BookController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getBooks(Model model) {
         List<Book> books = this.bookRepository.listAll();
+
+
 
         model.addAttribute("books", books);
 
@@ -61,7 +63,7 @@ public class BookController {
 
     @RequestMapping(value = "correctBook/{id}/{name}/{author}/{year}/{genre}/{about}/{count}/{rating}", method = RequestMethod.GET)
     public String correctBook(Model model,@PathVariable Integer id,@PathVariable String name,@PathVariable String author,@PathVariable int year,@PathVariable String genre,@PathVariable String about,@PathVariable int count,@PathVariable int rating) {
-        p=id;
+        numberBook=id;
         Book book=new Book();
         book.setName(name);
         book.setAuthor(author);
@@ -77,7 +79,7 @@ public class BookController {
     }
     @RequestMapping(value = "correctBook/{id}/{name}/{author}/{year}/{genre}/{about}/{count}/{rating}", method = RequestMethod.POST)
     public String correctBook(@ModelAttribute("book") Book book) {
-        this.bookRepository.correctBook(p,book);
+        this.bookRepository.correctBook(numberBook,book);
         return "redirect:/";
     }
 }

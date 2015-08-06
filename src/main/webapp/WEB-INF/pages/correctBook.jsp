@@ -1,12 +1,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
+
     <title>
         Correct Book
     </title>
+    <meta charset=utf-8">
 </head>
 <body>
+
 <form:form method="post" action="correctBook" commandName="book">
     <table>
         <tr>

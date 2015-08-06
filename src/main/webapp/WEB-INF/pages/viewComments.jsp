@@ -2,12 +2,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+
     <title>Comments</title>
+    <meta charset=utf-8">
 </head>
 <body>
+
 <div>
     <h1>Comments</h1>
     <c:if test="${!empty comments}">
+
         <table>
             <tr>
                 <td>Author</td>
@@ -27,8 +31,9 @@
         </table>
     </c:if>
 
+
 </div>
-<div><a href="addComment">Add Comment</a></div>
+<div><a href="/addComment/">Add Comment</a></div>
 <div><a href="/">Home Page</a></div>
 
 </body>
