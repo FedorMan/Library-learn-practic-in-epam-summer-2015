@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class CommentController {
 
     private CommentRepository commentRepository;
-    public static int numberBook=2;
+    public static int numberBook;
 
     @Autowired
     public CommentController(CommentRepository commentRepository) {
@@ -28,24 +29,30 @@ public class CommentController {
 
     @RequestMapping(value = "viewComments/{id}", method = RequestMethod.GET)
     public String getComments(Model model, @PathVariable Integer id) {
+        numberBook = id;
         List<Comment> comments = this.commentRepository.listAll();
-        numberBook=id;
         for (int i = 0; i < comments.size(); i++) {
-            if (comments.get(i).getiDBook() != id) {
-                comments.remove(i);
+            if (comments.get(i).getiDBook() == numberBook) {
+                continue;
             }
+            comments.remove(i);
+            i--;
         }
+
         model.addAttribute("comments", comments);
 
         return "viewComments";
     }
+
     @RequestMapping(value = "postAddComment", method = RequestMethod.GET)
     public String getPostAddComments(Model model) {
         List<Comment> comments = this.commentRepository.listAll();
         for (int i = 0; i < comments.size(); i++) {
-            if (comments.get(i).getiDBook() != numberBook) {
-                comments.remove(i);
+            if (comments.get(i).getiDBook() == numberBook) {
+                continue;
             }
+            comments.remove(i);
+            i--;
         }
         model.addAttribute("comments", comments);
 
@@ -75,15 +82,15 @@ public class CommentController {
     }
 
 
-    //  @RequestMapping(value = "correctBook/{id}", method = RequestMethod.GET)
+    //  @RequestMapping(value = "correctComment/{id}", method = RequestMethod.GET)
 //    public String correctBook(Model model,@PathVariable Integer id) {
-    // p=id;
-    //  model.addAttribute("book", new Book());
-    //   return "correctBook";
+    // d=id;
+    //  model.addAttribute("comment", new Comment());
+    //   return "correctComment";
     // }
-    // @RequestMapping(value = "correctBook/{id}", method = RequestMethod.POST)
-    //  public String correctBook(@ModelAttribute("book") Book book) {
-    //   this.bookRepository.correctBook(p,book);
+    // @RequestMapping(value = "correctComment/{id}", method = RequestMethod.POST)
+    //  public String correctComment(@ModelAttribute("comment") Comment comment) {
+    //   this.commentRepository.correctComment(p,comment);
     //     return "redirect:/";
     //   }
 }

@@ -30,16 +30,10 @@ public class CommentRepository {
         }
     }
 
- //   public void correctBook(Integer iD, Book book) {
- //       Book contact = (Book) this.sessionFactory.getCurrentSession().load(Book.class, iD);
+ //   public void correctComment(Integer iD, Comment comment) {
+ //       Comment contact = (Comment) this.sessionFactory.getCurrentSession().load(Comment.class, iD);
   //      if (null != contact) {
-     //       contact.setName(book.getName());
-      //      contact.setAbout(book.getAbout());
-       //     contact.setGenre(book.getGenre());
-        //    contact.setAuthor(book.getAuthor());
-      //      contact.setYear(book.getYear());
-    //        contact.setCount(book.getCount());
-    //        contact.setRating(book.getRating());
+
    //         this.sessionFactory.getCurrentSession().update(contact);
   //      }
  //   }

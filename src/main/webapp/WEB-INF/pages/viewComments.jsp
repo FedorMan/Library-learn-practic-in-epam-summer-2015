@@ -1,10 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<meta http-equiv="Content-Type" content="text/html" ; charset="cp1251"/>
 <head>
 
     <title>Comments</title>
-    <meta charset=utf-8">
+
 </head>
 <body>
 
