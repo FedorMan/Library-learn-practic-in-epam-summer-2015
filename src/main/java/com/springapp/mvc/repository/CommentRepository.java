@@ -8,21 +8,29 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+/**
+ репозиторий комментария (ведет работу с бд)
+ */
 @Repository
 @Transactional
 public class CommentRepository {
     @Autowired
     private SessionFactory sessionFactory;
-
+    /**
+     метод сохраняет комментарий в бд
+     */
     public void addComment(Comment comment) {
         this.sessionFactory.getCurrentSession().save(comment);
     }
-
+    /**
+     метод получает список комментариев из бд
+     */
     public List<Comment> listAll() {
         return this.sessionFactory.getCurrentSession().createQuery("from Comment").list();
     }
-
+    /**
+     метод удаляет комментарий из бд по его уникальному идентификатору
+     */
     public void removeComment(Integer iD) {
        Comment contact = (Comment) this.sessionFactory.getCurrentSession().load(Comment.class, iD);
         if (null != contact) {

@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ контроллер комментариев
+ */
 @Controller
 public class CommentController {
 
@@ -27,6 +29,9 @@ public class CommentController {
         this.commentRepository = commentRepository;
     }
 
+    /**
+     метод получает идентификатор книги, затем получает из бд список комментариев, удаляет из него не нужные комментарии и отправляет на страницу
+     */
     @RequestMapping(value = "viewComments/{id}", method = RequestMethod.GET)
     public String getComments(Model model, @PathVariable Integer id) {
         numberBook = id;
@@ -43,7 +48,9 @@ public class CommentController {
 
         return "viewComments";
     }
-
+    /**
+     метод получает из бд список комментариев, удаляет из него не нужные комментарии и отправляет на страницу
+     */
     @RequestMapping(value = "postAddComment", method = RequestMethod.GET)
     public String getPostAddComments(Model model) {
         List<Comment> comments = this.commentRepository.listAll();
@@ -59,6 +66,9 @@ public class CommentController {
         return "postAddComment";
     }
 
+    /**
+     метод посылает объект комментария в форму
+     */
     @RequestMapping(value = "addComment", method = RequestMethod.GET)
     public String addComment(Model model) {
         model.addAttribute("comment", new Comment());
@@ -66,6 +76,9 @@ public class CommentController {
         return "addComment";
     }
 
+    /**
+    метод добавляет в объект комментария указатель на книгу и отправляет объект в репозиторий для записи в бд
+     */
     @RequestMapping(value = "addComment", method = RequestMethod.POST)
 
     public String addComment(@ModelAttribute("comment") Comment comment) {
@@ -74,6 +87,9 @@ public class CommentController {
         return "redirect:/postAddComment";
     }
 
+    /**
+     метод получает идентификатор комментария и отправляет его в репозиторий для дальнейшего удаления
+     */
     @RequestMapping(value = "deleteComment/{id}", method = RequestMethod.GET)
     public String deleteComment(@PathVariable Integer id) {
         this.commentRepository.removeComment(id);

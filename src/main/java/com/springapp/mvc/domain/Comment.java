@@ -1,7 +1,9 @@
 package com.springapp.mvc.domain;
 
 import javax.persistence.*;
-
+/**
+ В классе инициализируется объект таблицы из бд
+ */
 @Entity
 @Table(name = "comments")
 public class Comment {

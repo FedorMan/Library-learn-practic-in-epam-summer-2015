@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.persistence.*;
 
 
+/**
+    В классе инициализируется объект таблицы из бд
+ */
 @Entity
 @Table (name = "books")
 public class Book {
